@@ -1,11 +1,4 @@
 ---
 
-- find: >
-    paths=/etc/yum.repos.d/
-    patterns=epel.repo
-  register: res
-
-- name: epel
-  become: yes
-  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
-  when: res.matched == 0
+- include: redhat.yml
+  when: ansible_os_family == 'RedHat'
